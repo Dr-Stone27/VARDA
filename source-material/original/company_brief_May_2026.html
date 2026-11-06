@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Brief — AI Operations Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f5f2ec;
+    --warm: #c8a96e;
+    --muted: #7a7570;
+    --rule: #d9d4cb;
+    --accent: #2a4a3e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* Page layout */
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  /* Cover */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 80px 48px;
+    max-width: 780px;
+    margin: 0 auto;
+    border-right: 1px solid var(--rule);
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .doc-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .doc-date {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .cover-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 60px;
+  }
+
+  .cover-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 60px);
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 32px;
+    max-width: 580px;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .cover-line {
+    width: 48px;
+    height: 2px;
+    background: var(--warm);
+    margin-bottom: 28px;
+  }
+
+  .cover-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 460px;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .cover-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 40px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .cover-bottom-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .confidential {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 500;
+  }
+
+  /* Section divider */
+  .section-break {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 64px 0;
+  }
+
+  /* Section header */
+  .section-num {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 28px;
+    line-height: 1.25;
+  }
+
+  /* Body text */
+  p {
+    margin-bottom: 20px;
+    color: #2a2825;
+    font-size: 15.5px;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* Pull quote */
+  .pull-quote {
+    border-left: 3px solid var(--warm);
+    padding: 4px 0 4px 28px;
+    margin: 40px 0;
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  /* Two column */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 32px 0;
+  }
+
+  .col-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .col-body {
+    font-size: 15px;
+    color: #2a2825;
+    line-height: 1.65;
+  }
+
+  /* Service card */
+  .service-card {
+    border: 1px solid var(--rule);
+    padding: 36px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--warm);
+  }
+
+  .service-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .service-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .service-meta {
+    display: flex;
+    gap: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .meta-item {}
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .meta-value {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Funnel diagram */
+  .funnel {
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .funnel-step {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .funnel-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+  }
+
+  .funnel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--warm);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .funnel-line {
+    width: 1px;
+    flex: 1;
+    background: var(--rule);
+    margin: 4px 0;
+    min-height: 24px;
+  }
+
+  .funnel-content {
+    padding-bottom: 32px;
+    flex: 1;
+  }
+
+  .funnel-step:last-child .funnel-content {
+    padding-bottom: 0;
+  }
+
+  .funnel-step:last-child .funnel-line {
+    display: none;
+  }
+
+  .funnel-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .funnel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .funnel-body {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Differentiation table */
+  .diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 14.5px;
+  }
+
+  .diff-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .diff-table th:not(:first-child) {
+    text-align: center;
+  }
+
+  .diff-table td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    color: #2a2825;
+    vertical-align: middle;
+  }
+
+  .diff-table td:not(:first-child) {
+    text-align: center;
+  }
+
+  .check { color: var(--accent); font-size: 16px; }
+  .cross { color: #bbb; font-size: 16px; }
+  .partial { color: var(--warm); font-size: 16px; }
+
+  /* Market numbers */
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+  }
+
+  .number-block {
+    background: var(--paper);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .number-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .number-label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Vertical tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .tag {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+  }
+
+  .tag.active {
+    border-color: var(--warm);
+    color: var(--warm);
+  }
+
+  /* Closing */
+  .closing {
+    background: var(--accent);
+    color: var(--paper);
+    padding: 64px 48px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .closing .section-num { color: var(--warm); }
+
+  .closing .section-title {
+    color: var(--paper);
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .closing p {
+    color: rgba(245, 242, 236, 0.8);
+    font-size: 15.5px;
+  }
+
+  .closing-cta {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(245, 242, 236, 0.2);
+    font-size: 13px;
+    color: rgba(245, 242, 236, 0.5);
+    letter-spacing: 0.05em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cover-eyebrow { animation: fadeUp 0.6s ease both; }
+  .cover-title { animation: fadeUp 0.6s ease 0.1s both; }
+  .cover-line { animation: fadeUp 0.6s ease 0.2s both; }
+  .cover-sub { animation: fadeUp 0.6s ease 0.3s both; }
+
+  @media (max-width: 600px) {
+    .cover, .page { padding: 48px 28px; }
+    .two-col { grid-template-columns: 1fr; gap: 28px; }
+    .numbers-grid { grid-template-columns: 1fr; }
+    .service-meta { flex-direction: column; gap: 16px; }
+    .closing { padding: 48px 28px; }
+    .diff-table { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <span class="doc-label">Company Brief — Confidential</span>
+    <span class="doc-date">May 2026</span>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-eyebrow">A New Kind of Advisory Practice</div>
+    <h1 class="cover-title">Helping Companies Grow <em>Through</em> AI, Not Just With It</h1>
+    <div class="cover-line"></div>
+    <p class="cover-sub">A structured advisory practice that helps e-commerce and DTC brands find where AI genuinely creates value — and builds the operational foundation to sustain it.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <span class="cover-bottom-label">For review and discussion — not for distribution</span>
+    <span class="confidential">Draft v1.0</span>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page">
+
+  <!-- THE PROBLEM -->
+  <div class="section-num">01 — The Problem</div>
+  <h2 class="section-title">AI adoption is accelerating. Clarity is not.</h2>
+
+  <p>Most companies are not behind on AI. They are ahead of their own foundations. They have adopted tools faster than they have designed the processes around them — and the gap between what AI promises and what it actually delivers is growing wider every quarter.</p>
+
+  <p>The result is not failure. It is invisible leakage: wrong recommendations reaching customers, automated workflows producing errors at scale, teams handed tools they do not fully understand or trust, and founders who cannot tell whether their AI investment is working or not.</p>
+
+  <p>At the same time, a different group of companies is frozen at the starting line — feeling pressure to adopt AI but unable to answer the most basic question: where do we actually start?</p>
+
+  <div class="pull-quote">
+    <p>"The companies that get real value from AI do not move fast. They move with clarity."</p>
+  </div>
+
+  <p>The market has no shortage of AI tools, AI vendors, or AI consultants who will tell you that everything is an opportunity. What it lacks is a practice built specifically to help growing companies think clearly, move deliberately, and build the operational foundations that make AI adoption sustainable.</p>
+
+  <hr class="section-break">
+
+  <!-- THE OPPORTUNITY -->
+  <div class="section-num">02 — The Market Opportunity</div>
+  <h2 class="section-title">A validated gap in a proven market.</h2>
+
+  <p>AI adoption is widespread but maturity is still low. The gap between companies that have adopted AI tools and companies that have operationalized them effectively is exactly where this practice sits.</p>
+
+  <div class="numbers-grid">
+    <div class="number-block">
+      <div class="number-big">88%</div>
+      <div class="number-label">of companies use AI in at least one function — but only one third have begun to scale</div>
+    </div>
+    <div class="number-block">
+      <div class="number-big">$5k–$50k</div>
+      <div class="number-label">typical engagement range for targeted AI workflow audits and readiness assessments</div>
+    </div>
+    <div class="number-block">
+      <div class="number-big">2x</div>
+      <div class="number-label">natural service funnel — one client generates two sequential engagements over 6–12 months</div>
+    </div>
+  </div>
+
+  <p>The primary market is mid-market DTC and e-commerce brands between $2M and $50M ARR — companies large enough to feel the pain of operational inefficiency and small enough to be underserved by the major consulting firms. This buyer moves faster, contracts more flexibly, and values practical output over theoretical frameworks.</p>
+
+  <p>The secondary market — legal and healthcare — has been validated through independent research as the highest-value extension path, with audit engagements in those verticals commanding $15k–$50k per engagement justified by compliance risk and revenue recovery.</p>
+
+  <div class="tags">
+    <span class="tag active">E-commerce / DTC — Primary</span>
+    <span class="tag active">Legal — Validated Extension</span>
+    <span class="tag active">Healthcare RCM — Validated Extension</span>
+    <span class="tag">Construction — Early Signal</span>
+  </div>
+
+  <hr class="section-break">
+
+  <!-- THE SERVICES -->
+  <div class="section-num">03 — The Services</div>
+  <h2 class="section-title">Two services. One natural funnel.</h2>
+
+  <p>The practice offers two distinct but connected services. They serve different buyers at different stages — and together they form a client relationship that compounds over time.</p>
+
+  <div class="service-card">
+    <div class="service-tag">Service One — For companies already running AI</div>
+    <div class="service-name">AI Workflow Audit</div>
+    <p class="service-desc">A structured 2-week diagnostic of every AI touchpoint in a company's operations. We map where each tool sits in the workflow, score it across five dimensions, identify where failures are occurring silently, and deliver a prioritized fix plan with a 60-day implementation roadmap.</p>
+    <p class="service-desc">The buyer is already using AI and suspects — or has evidence — that something is not working. The audit gives them clarity, a defensible finding, and a concrete path forward.</p>
+    <div class="service-meta">
+      <div class="meta-item">
+        <div class="meta-label">Duration</div>
+        <div class="meta-value">2 weeks</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Entry Price</div>
+        <div class="meta-value">From $3,500</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Primary Buyer</div>
+        <div class="meta-value">Head of Growth / Ops</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <div class="service-tag">Service Two — For companies considering AI</div>
+    <div class="service-name">AI Readiness Assessment</div>
+    <p class="service-desc">A structured 2-week assessment of a company's operational processes before any AI tools are adopted. We inventory every significant process, score each for AI opportunity across six dimensions, surface what needs to change before adoption can succeed, and deliver a prioritized 30/60/90-day roadmap.</p>
+    <p class="service-desc">The buyer is feeling external pressure to adopt AI but does not know where to start. The assessment removes the anxiety of the wrong decision and replaces it with a clear, sequenced plan.</p>
+    <div class="service-meta">
+      <div class="meta-item">
+        <div class="meta-label">Duration</div>
+        <div class="meta-value">2 weeks</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Entry Price</div>
+        <div class="meta-value">From $3,500</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Primary Buyer</div>
+        <div class="meta-value">Founder / COO</div>
+      </div>
+    </div>
+  </div>
+
+  <p>The two services are not competing offers — they are sequential. A company that completes a Readiness Assessment and then adopts AI tools becomes a natural candidate for a Workflow Audit 6–12 months later. One client relationship generates two engagements.</p>
+
+  <hr class="section-break">
+
+  <!-- THE METHODOLOGY -->
+  <div class="section-num">04 — The Methodology</div>
+  <h2 class="section-title">Structured. Repeatable. Built to scale.</h2>
+
+  <p>The practice is not built on intuition or general consulting. It is built on a proprietary methodology — a set of structured frameworks that produce consistent, defensible, actionable outputs regardless of which client is being served.</p>
+
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-left">
+        <div class="funnel-dot"></div>
+        <div class="funnel-line"></div>
+      </div>
+      <div class="funnel-content">
+        <div class="funnel-label">Layer One</div>
+        <div class="funnel-title">Process Mapping</div>
+        <p class="funnel-body">A structured inventory of every significant operational process — what it is, who owns it, what it costs in time and error risk, and whether the underlying data and infrastructure can support AI. Built to surface the real process, not the official one.</p>
+      </div>
+    </div>
+
+    <div class="funnel-step">
+      <div class="funnel-left">
+        <div class="funnel-dot"></div>
+        <div class="funnel-line"></div>
+      </div>
+      <div class="funnel-content">
+        <div class="funnel-label">Layer Two</div>
+        <div class="funnel-title">Scoring Rubrics</div>
+        <p class="funnel-body">Every process or AI touchpoint is scored across a multi-dimension rubric — producing a classification (Green / Amber / Red for audits; Tier 1 / 2 / 3 for assessments) that is consistent, comparable, and explainable to any stakeholder. Opinion becomes evidence.</p>
+      </div>
+    </div>
+
+    <div class="funnel-step">
+      <div class="funnel-left">
+        <div class="funnel-dot"></div>
+        <div class="funnel-line"></div>
+      </div>
+      <div class="funnel-content">
+        <div class="funnel-label">Layer Three</div>
+        <div class="funnel-title">Discovery Framework</div>
+        <p class="funnel-body">A structured intake and discovery process — forms, facilitated workshops, and a scripted 60–90 minute call framework — that extracts the real operational picture before any assessment begins. The gap between the official process and the actual process is where most value is found.</p>
+      </div>
+    </div>
+
+    <div class="funnel-step">
+      <div class="funnel-left">
+        <div class="funnel-dot"></div>
+        <div class="funnel-line"></div>
+      </div>
+      <div class="funnel-content">
+        <div class="funnel-label">Layer Four</div>
+        <div class="funnel-title">Deliverable System</div>
+        <p class="funnel-body">Every engagement produces four outputs: an executive impact summary, annotated workflow maps, a prioritized fix or adoption list, and a sequenced 30/60/90-day action plan. Designed to be acted on immediately — not filed away.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>This methodology is fully documented and built to be handed off. As the practice scales, the frameworks transfer to contractors and associates — preserving quality without requiring founder involvement in every engagement.</p>
+
+  <hr class="section-break">
+
+  <!-- DIFFERENTIATION -->
+  <div class="section-num">05 — Differentiation</div>
+  <h2 class="section-title">Why this, and why not something else?</h2>
+
+  <p>This is the question that deserves the most honest answer. The market for AI consulting is not empty. The differentiation is real but requires clarity to communicate.</p>
+
+  <table class="diff-table">
+    <thead>
+      <tr>
+        <th>What buyers need</th>
+        <th>Generic AI consultant</th>
+        <th>Major consulting firm</th>
+        <th>This practice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vertical-specific operational depth</td>
+        <td><span class="cross">—</span></td>
+        <td><span class="partial">◐</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Right-sized for $2M–$50M companies</td>
+        <td><span class="partial">◐</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Structured, repeatable methodology</td>
+        <td><span class="cross">—</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Actionable output (not a maturity score)</td>
+        <td><span class="partial">◐</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Pre-adoption and post-adoption coverage</td>
+        <td><span class="cross">—</span></td>
+        <td><span class="partial">◐</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Honest about what AI cannot do</td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The deepest differentiator is not the frameworks or the deliverables. It is the posture. Most AI advisors are incentivized to make every process look like an AI opportunity — either because they earn referral fees from tools, or because their value proposition depends on the size of the problem.</p>
+
+  <p>This practice is built on the opposite premise: the most valuable thing we can sometimes tell a client is what not to adopt, and why. That honesty is the foundation of every client relationship — and it is what produces referrals.</p>
+
+  <hr class="section-break">
+
+  <!-- THE FOUNDING CONTEXT -->
+  <div class="section-num">06 — Founding Context</div>
+  <h2 class="section-title">Where this comes from.</h2>
+
+  <div class="two-col">
+    <div>
+      <div class="col-label">The background</div>
+      <p class="col-body">The practice is founded by a product manager with hands-on experience designing systems at the intersection of technology and human process. Having built products in high-stakes, regulated environments — including trust infrastructure, escrow-backed payments, and reputation systems — the approach brings both product rigor and operational empathy to every engagement.</p>
+    </div>
+    <div>
+      <div class="col-label">Why this matters</div>
+      <p class="col-body">Product management is fundamentally the discipline of understanding what a system should do, what it actually does, and what needs to change. Applied to AI adoption, that is exactly the skill that mid-market companies lack — not AI literacy, but systems thinking and operational clarity. This practice is the direct application of that capability as a service.</p>
+    </div>
+  </div>
+
+  <hr class="section-break">
+
+  <!-- CURRENT STATUS -->
+  <div class="section-num">07 — Current Status & Next Steps</div>
+  <h2 class="section-title">Where this stands today.</h2>
+
+  <p>The practice is at the pre-revenue, structured foundation stage. The full service methodology has been designed and documented — both services have complete scoring rubrics, intake and discovery frameworks, sample deliverables, positioning documents, and outreach systems. The infrastructure to deliver is ready.</p>
+
+  <p>The immediate priority is singular: the first paying client. One engagement validates the pricing, tests the methodology against a real operational context, and produces the case study that anchors all future outreach.</p>
+
+  <p>The path to first client is through the e-commerce and DTC vertical — specifically targeting founders and ops leads at companies between $2M and $20M ARR in the US and UK markets, through LinkedIn outreach and targeted community engagement.</p>
+
+  <div class="two-col">
+    <div>
+      <div class="col-label">What is in place</div>
+      <p class="col-body">Complete service methodology. Two scoring rubrics. Two sample deliverables. Two intake and discovery frameworks. Positioning documents. Outreach system. Validated market research across two independent research cycles.</p>
+    </div>
+    <div>
+      <div class="col-label">What this brief is for</div>
+      <p class="col-body">To present the idea clearly to advisors, domain experts, and potential early clients — and to invite honest scrutiny. The methodology is skeletal by design. It is built to be stress-tested and refined through real engagement, not perfected in isolation.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="section-num">08 — The Ask</div>
+  <h2 class="section-title">What we are looking for.</h2>
+
+  <p>This brief is not a finished product. It is a clear articulation of a direction — built to invite the kind of honest, expert challenge that sharpens an idea before it meets the market.</p>
+
+  <p>If you work in e-commerce operations, AI adoption, consulting, or product — your perspective on what is missing, what is overstated, and what the first client conversation actually looks like is more valuable than validation.</p>
+
+  <p>If you are a founder or ops lead at a DTC brand who recognizes the problem described here — the most useful thing you can do is tell us where this does not match your reality.</p>
+
+  <p>The single metric this practice is optimizing for right now is one thing: the first engagement. Everything else — vertical expansion, team building, productization — comes after that.</p>
+
+  <div class="closing-cta">
+    Prepared May 2026 &nbsp;·&nbsp; Draft v1.0 &nbsp;·&nbsp; For discussion only &nbsp;·&nbsp; Not for distribution
+  </div>
+</div>
+
+</body>
+</html>
