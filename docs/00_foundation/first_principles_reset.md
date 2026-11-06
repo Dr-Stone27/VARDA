@@ -35,7 +35,7 @@ The unified methodology describes five stages:
 1. **Map** — establish what actually happens, not only the official process.
 2. **Score** — apply defined criteria to turn observations into explainable assessments.
 3. **Decide** — prioritise based on impact and feasibility.
-4. **Implement** — assign owners, timelines, metrics and controls.
+4. **Implement (planning)** — turn the recommendation into an action plan with named owners, timelines, success metrics and controls. In the original standard engagement, the client—not Varda—carries out the implementation.
 5. **Verify** — evaluate whether the changes produced the intended result.
 
 The two original services use different units of analysis: existing AI touchpoints for the Workflow Audit, and operational processes for the Readiness Assessment.
